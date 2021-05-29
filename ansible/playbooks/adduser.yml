@@ -1,0 +1,32 @@
+---
+- hosts: sftp
+  become: yes
+  gather_facts: no
+  vars_prompt:
+    - name: username
+      prompt: What is your username?
+      private: no
+
+    - name: password
+      prompt: What is your password?
+      private: yes
+      encrypt: sha512_crypt
+      confirm: yes
+      salt_size: 7
+    
+  tasks:
+  - name: add group sftpg
+    group:
+      name: sftpg
+      state: present
+
+  - name: add user ftpuser
+    user:
+      name: "{{ username }}"
+      comment: FTP user
+      group: sftpg
+      create_home: yes
+      home: /jail/{{ username }}
+      move_home: yes
+      password: "{{ password }}"
+

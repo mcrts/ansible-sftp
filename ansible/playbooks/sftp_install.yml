@@ -1,0 +1,19 @@
+---
+- hosts: sftp
+  become: yes
+  gather_facts: no
+
+  tasks:
+  - name: create sftp jail dir
+    file:
+      path: /jail
+      state: directory
+      mode: '0755'
+
+  - name: configure sftp chroot in sshd_config
+    copy: src=/home/vagrant/playbooks/sshd_config dest=/etc/ssh/sshd_config mode=644 owner=root group=root
+    notify: restart ssh
+    
+  handlers:
+  - name: restart ssh
+    service: name=ssh state=restarted
