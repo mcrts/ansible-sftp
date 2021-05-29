@@ -1,6 +1,6 @@
 # ansible-sftp
 
-SFTP server configuation with Ansible (using Vagrant).\
+SFTP server configuration with Ansible (using Vagrant).\
 With a sftp jail at /jail.\
 Disable ssh connection for users under the sftpg group.
 
