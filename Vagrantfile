@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
       end
       mgmt_config.vm.provision :shell, path: "bootstrap-mgmt.sh"
   end
-
-  # create load balancer
+  
+  # create sftp server node
   config.vm.define :sftpserver do |sftpserver_config|
       sftpserver_config.vm.box = "ubuntu/trusty64"
       sftpserver_config.vm.hostname = "sftpserver"
