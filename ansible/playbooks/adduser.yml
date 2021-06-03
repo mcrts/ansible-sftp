@@ -25,8 +25,14 @@
       name: "{{ username }}"
       comment: FTP user
       group: sftpg
-      create_home: yes
-      home: /jail/{{ username }}
-      move_home: yes
+      create_home: no
       password: "{{ password }}"
+  
+  - name: Create the sftp home directory
+    file:
+      path: /jail/{{ username }}
+      state: directory
+      mode: '0700'
+      owner: {{ username }}
+      group: sftpg
 
